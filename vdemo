@@ -1,0 +1,71 @@
+:
+#
+# vde demo (C)Copyright TeoSoft Inc.
+#
+a=0
+t=0; b=0; l=22; r=79
+clear
+while [ $a -ne 9 ]
+do
+	a=`expr $a + 1`
+	t=`expr $t + 1`; b=`expr $b + 1`; l=`expr $l - 1`; r=`expr $r - 1`
+	vde box $t $b $l $r
+done
+vde rev
+vde center 11 " vde 2.4 (C)Copyright 1992-93-94-95 by TeoSoft Inc."
+sleep 2
+vde attroff
+clear
+vde alert_s " ATTENZIONE " " | Questo e' un box di allarme creato | con la funzione |-| vde alert_s " 
+sleep 2
+clear
+x=0
+y=1
+while [ $x -lt 9 ]
+do
+	x=`expr $x + 1`
+	y=`expr $y + 1`
+	vde center $x "                                                     "
+	vde center $y "Questa scritte sono create con le funzioni"
+done
+x=79
+while [ $x -gt 0 ]
+do
+	x=`expr $x - 1`
+	vde goto 11 $x "--"
+done
+x=0
+while [ $x -lt 25 ]
+do
+	x=`expr $x + 1`
+	vde goto 12 $x " vde goto x y, vde center [testo]"
+done
+sleep 2
+vde logo DEMO
+vde center 9 "Questo schermo e' creato con la funzione [vde logo]"
+sleep 4
+clear
+vde goto 0 0 "Vari tipi di attributi di testo"
+echo "\n=========================================\n"
+echo "\n"
+vde blink "vde blink"
+echo "\n"
+vde bold "vde bold"
+echo "\n"
+vde underlineon; echo "vde underlineon"; vde underlineoff
+echo "\n"
+vde rev "vde rev"
+sleep 2
+clear
+vde repeat 80 A
+vde repeat 80 B
+vde repeat 80 C
+vde repeat 80 '>'
+vde repeat 80 pad
+vde repeat 80 line
+vde repeat 80 line
+vde repeat 80 line
+vde repeat 80 line
+vde repeat 80 line
+
+
