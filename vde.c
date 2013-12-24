@@ -7,6 +7,7 @@ Compilazione   : cc -o vde vde.c -l curses
 ================================================================================
 */
 
+#include <string.h>
 #include <curses.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -32,9 +33,10 @@ void array_assign(char *alert_list);
 void exit_error(int errore);
 void Info();
 void Instructions();
+void getlinea(char *tamp);
 char *getenv();
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
    char titolo[80];
    int ww=0;
@@ -88,31 +90,31 @@ main(int argc, char **argv)
       tp=time(0L);
       switch(localtime(&tp)->tm_wday)
       {
-	case 0: printf("Domenica, ");  break;
-	case 1: printf("Lunedi, ");    break;
-	case 2: printf("Martedi, ");   break;
-	case 3: printf("Mercoledi, "); break;
-	case 4: printf("Giovedi, ");   break;
-	case 5: printf("Venerdi, ");   break;
-	case 6: printf("Sabato, ");    break;
+      	case 0: printf("Domenica, ");  break;
+      	case 1: printf("Lunedi, ");    break;
+      	case 2: printf("Martedi, ");   break;
+      	case 3: printf("Mercoledi, "); break;
+      	case 4: printf("Giovedi, ");   break;
+      	case 5: printf("Venerdi, ");   break;
+      	case 6: printf("Sabato, ");    break;
       }
       printf("%.2d ", localtime(&tp)->tm_mday);
       switch(localtime(&tp)->tm_mon)
       {
-	case 0:  printf("Gennaio ");    break;
-	case 1:  printf("Febbraio ");   break;
-	case 2:  printf("Marzo ");      break;
-	case 3:  printf("Aprile ");     break;
-	case 4:  printf("Maggio ");     break;
-	case 5:  printf("Giugno ");     break;
-	case 6:  printf("Luglio ");     break; 
-	case 7:  printf("Agosto ");     break;
-	case 8:  printf("Settembre ");  break;
-	case 9:  printf("Ottobre ");    break;
-	case 10: printf("Novembre ");   break;
-	case 11: printf("Dicembre ");   break;
+      	case 0:  printf("Gennaio ");    break;
+      	case 1:  printf("Febbraio ");   break;
+      	case 2:  printf("Marzo ");      break;
+      	case 3:  printf("Aprile ");     break;
+      	case 4:  printf("Maggio ");     break;
+      	case 5:  printf("Giugno ");     break;
+      	case 6:  printf("Luglio ");     break; 
+      	case 7:  printf("Agosto ");     break;
+      	case 8:  printf("Settembre ");  break;
+      	case 9:  printf("Ottobre ");    break;
+      	case 10: printf("Novembre ");   break;
+      	case 11: printf("Dicembre ");   break;
       }
-      printf("'%.2ld", localtime(&tp)->tm_year);
+      printf("'%i", localtime(&tp)->tm_year);
       if((argc==3)&&(strcmp(argv[2], "-o") == 0))
       {
          printf("\n");
@@ -514,7 +516,7 @@ main(int argc, char **argv)
       strcat(linea, nometemp);
       system(linea);
       infile=fopen(nometemp, "r");
-      getline(sistema);
+      getlinea(sistema);
       fclose(infile);
       unlink(nometemp);
       strcpy(padre, argv[2]);
@@ -802,7 +804,7 @@ void exit_error(int errore)
 
 /* MEMORIZZA IN UNA VARIABILE IL CONTENUTO DI UNA LINEA DI UN FILE LETTO */
 /* ===================================================================== */
-int getline(char *tamp)		
+void getlinea(char *tamp)      
 {
    int ii=0;
    int c=0;
@@ -811,12 +813,12 @@ int getline(char *tamp)
       if (c=='\n')
       {
          tamp[ii]=0;
-	 return(ii);
+         return;
       }
       tamp[ii++]=c;
       tamp[ii]=0;
    }
-   return(EOF);
+   return;
 }
 
 /* RIASSUNTO DEI COMANDI */
